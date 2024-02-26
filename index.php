@@ -43,8 +43,8 @@ $chambre30= new Chambre(30, 200, 3, "oui", $hilton);
 
 // hotel regent
 
-$chambreR1=new Chambre(1, 100.0, 2, "oui", $hilton);
-$chambreR2= new Chambre(2, 100.0, 2, "oui", $hilton);
+// $chambreR1=new Chambre(1, 100.0, 2, "oui", $hilton);
+// $chambreR2= new Chambre(2, 100.0, 2, "oui", $hilton);
 
 //CLIENT string $prenom, string $nom
 $laureSchaeffer= new Client("Laure", "Schaeffer");
@@ -54,16 +54,38 @@ $reserv1= new Reservation("2024-02-25", "2024-02-28", $laureSchaeffer, $chambre1
 $reserv2= new Reservation("2024-03-01", "2024-03-05", $mickaelMurmann, $chambre2);
 
 
-// premier affichage hotel
-echo $hilton->infoHotel();
+?>
 
-//deuxieme affichage réservations de l'hotel
-echo $reserv1->afficherInfo();
-
-//troisieme affichage reservation vide de l'hotel Regent
-echo $regent->statutChambre();
-
-//quatrième affichage d'un client
-echo $laureSchaeffer->afficherReservation();
-
-echo $hilton->statutChambre();
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <title>Hotel - POO </title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Hotel - Programation orientée objet </h1>
+            
+             <!-- premier affichage hotel -->
+            <?= $hilton->infoHotel(); ?>
+            
+            <!-- deuxieme affichage réservations de l'hotel -->
+            <?= $reserv1->afficherInfo(); ?>
+            
+            <!-- troisieme affichage reservation vide de l'hotel Regent -->
+            
+            
+            <!-- quatrième affichage d'un client -->
+            <?= $laureSchaeffer->afficherReservation(); ?>
+            
+            <!-- cinquieme affichage statuts des chambres  -->
+            <?= $hilton->statutChambre(); ?>
+            
+    </div>
+    
+</body>
+</html>

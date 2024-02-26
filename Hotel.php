@@ -126,14 +126,6 @@ class Hotel{
         return $this." ".$this->adresse." ".$this->cp;
     }
 
-    // affiche tous les objets Chambres contenus dans le tableau
-    public function afficherChambres(){
-        $result= "<h3> Les chambres de l'hotel $this : </h3>";
-        foreach($this->chambres as $chambre){
-            $result.= $chambre."<br>";
-        }
-        return $result;
-    }
 
     public function nbChambres(){
         $nbChambres=count($this->chambres);
@@ -158,10 +150,13 @@ class Hotel{
 
     // listes des chambres avec leurs statuts
     public function statutChambre(){
+        ?> <div class="card-header"> <?php
         if($this->nbChambresRsv() < 0){
-            echo "Aucune réservation !";
+            ?> <p>"Aucune réservation !"</p> <?php
         } else {
-        ?> <h3>Statuts des chambres de <?=$this ?> </h3>
+        ?> <p>Statuts des chambres de <?=$this ?> </p>
+
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -194,25 +189,20 @@ class Hotel{
         }
     }
 
+
     public function infoHotel(){
         ?>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col"><?= $this ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> <?=$this->afficherInfo() ?>  </td>
-                    <td> Nombres de chambres : <?=$this->nbChambres() ?>  </td>
-                    <td> Nombre de chambres réservées : <?=$this->nbChambresRsv() ?>  </td>
-                    <td> Nombre de chambres dispo :  <?=$this->nbChambresDispo() ?>  </td>
-                </tr>
-            </tbody>
-        </table>
-                <?php
+        <div class="card">
+            <div class="card-header">
+                <p><?=$this->afficherInfo() ?></p>
+            </div>
+            <div class="card-body">
+                <p>Nombres de chambres : <?=$this->nbChambres() ?></p>
+                <p>Nombre de chambres réservées : <?=$this->nbChambresRsv() ?></p>
+                <p>Nombre de chambres dispo :  <?=$this->nbChambresDispo() ?></p>
+            </div>
+        </div>
+        <?php
     }
-
 
 }

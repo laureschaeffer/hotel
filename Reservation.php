@@ -85,8 +85,16 @@ class Reservation{
 
     // ---------------------------methodes--------------------- 
     public function afficherInfo(){
-        ?> <h3>Réservations de l'hotel <?= $this->chambre->getHotel() ?></h3>
-        <p> <?= $this->client." - ".$this->chambre." du ".$this ?> </p>
+        ?> 
+        <div class="card">
+            <div class="card-header">
+                <p>Réservations de l'hotel <?= $this->chambre->getHotel() ?></p>
+            </div>
+            <div class="card-body">
+                <p><?= $this->client." - ".$this->chambre." du ".$this ?> </p>
+            </div>
+        </div>
+
         <?php
     }
 

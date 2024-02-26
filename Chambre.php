@@ -106,7 +106,7 @@ class Chambre{
     }
     //tostring
     public function __toString(){
-        return "chambre : ".$this->numero;
+        return "Chambre : ".$this->numero;
     }
 
     // ----- méthodes -------------

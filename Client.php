@@ -69,21 +69,30 @@ class Client{
         $this->reservations[]=$reservation;
     }
     // prix du séjour
-public function prixSejour(){
-    foreach($this->reservations as $reservation){
-        $dureeSejour=$reservation->getFinReservation()->diff($reservation->getDebutReservation())->days;
-        $prixSejour=$dureeSejour * ($reservation->getChambre()->getPrix());
-    }
-    return $prixSejour ;
+    public function prixSejour(){
+        foreach($this->reservations as $reservation){
+            $dureeSejour=$reservation->getFinReservation()->diff($reservation->getDebutReservation())->days;
+            $prixSejour=$dureeSejour * ($reservation->getChambre()->getPrix());
+        }
+        return $prixSejour ;
     }
 
     //reservations d'un client
     public function afficherReservation(){
-        foreach($this->reservations as $reservation){
-            echo "<h3> Réservation de : ".$this."</h3> Hotel : ".$reservation->getChambre()->getHotel()." / ".$reservation->getChambre()->afficherInfo()." du ".$reservation."<br> Prix total : ".$this->prixSejour()." € ";
-        }
+        ?> <div class="card">
+            <div class="card-header">
+                <p>Réservation de <?=$this ?></p>
+               <?php foreach($this->reservations as $reservation){ ?>
+            </div>
+            <div class="card-body">
+                <p><?=$reservation->getChambre()->getHotel()." / ".$reservation->getChambre()->afficherInfo()." du ".$reservation ?> </p>
+                <p>Prix total : <?= $this->prixSejour() ?> €</p>
+            </div>
+                <?php
+               } ?>
+            
+           </div>
+<?php
     }
-
-    
-    
+  
 }

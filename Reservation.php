@@ -7,12 +7,18 @@ class Reservation{
     private Client $client;
     private Chambre $chambre;
 
+
     public function __construct(string $debutReservation, string $finReservation, Hotel $hotel, Client $client, Chambre $chambre){
         $this->debutReservation= new DateTime($debutReservation);
         $this->finReservation= new DateTime($finReservation);
         $this->hotel=$hotel;
         $this->client=$client;
         $this->chambre=$chambre;
+
+        //methodes dans leurs classes respectives
+        $this->hotel->ajouterReservation($this);
+        $this->client->ajouterReservation($this);
+        $this->chambre->ajouterReservation($this);
 
     }
 
@@ -90,6 +96,28 @@ class Reservation{
 
     //tostring
     public function __toString(){
-        return $this->client." dans l'hotel ".$this->hotel." du ".$this->debutReservation->format('d-m-Y')." au ".$this->finReservation->format('d-m-Y');
+        return $this->debutReservation->format('d-m-Y')." au ".$this->finReservation->format('d-m-Y');
     }
+
+    // ---------------------------methodes--------------------- 
+    public function afficherInfo(){
+        return $this->client." dans l'hotel ".$this->hotel." du ".$this." ".$this->chambre;
+    }
+    
+    // afficher la durée du sejour
+    public function nbJours(){
+        $dureeSejour = $this->finReservation->diff($this->debutReservation)->days;
+        return $dureeSejour;
+    }
+
+    // afficher le prix du séjour
+    public function prixSejour(){
+        $dureeSejour = $this->finReservation->diff($this->debutReservation)->days;
+        $prixChambre=$this->chambre->getPrix();
+        $prixSejour=$dureeSejour * $prixChambre;
+        return $prixSejour;
+    }
+
+
+
 }

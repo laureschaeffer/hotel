@@ -7,7 +7,6 @@ class Hotel{
     private string $ville;
     private string $cp;
     private array $chambres;
-    private array $reservations;
 
     public function __construct(string $nom, string $nbEtoiles, string $adresse, string $ville, string $cp){
         $this->nom=$nom;
@@ -18,8 +17,6 @@ class Hotel{
 
         //tableau qui contient toutes les chambres de l'hotel
         $this->chambres=[];
-        // tableau qui va contenir l'objet Hotel, objet Client et objet Chambre
-        $this->reservations=[];
         
     }
 
@@ -109,19 +106,6 @@ class Hotel{
         return $this;
     }
 
-    public function getReservations()
-    {
-        return $this->reservations;
-    }
-
-
-    public function setReservations($reservations)
-    {
-        $this->reservations = $reservations;
-
-        return $this;
-    }
-
 
 
     //tostring
@@ -136,16 +120,12 @@ class Hotel{
         $this->chambres[]=$chambre;
     }
 
-    //fonction que je vais appeler dans l'objet Reservation
 
-    public function ajouterReservation(Reservation $reservation){
-        $this->reservations[]=$reservation;
-    }
-
-    //affiche toute les infos
+    //affiche toute les infos de l'hotel
     public function afficherInfo(){
         return $this." ".$this->adresse." ".$this->cp;
     }
+
     // affiche tous les objets Chambres contenus dans le tableau
     public function afficherChambres(){
         $result= "<h3> Les chambres de l'hotel $this : </h3>";
@@ -156,15 +136,82 @@ class Hotel{
     }
 
     public function nbChambres(){
-        return "Nombre de chambres : ".count($this->chambres);
+        $nbChambres=count($this->chambres);
+        return $nbChambres;
     }
 
-    public function nbReservation(){
-        return "Nombre de chambres réservées : ".count($this->reservations);
+    // calcule le nb de chambres prises ; je parcours le tableau chambre et cherche le getter getReservation, si ce tableau n'est pas vide alors il y a une réservation, à chaque tour il en ajoute un au compte
+    public function nbChambresRsv(){
+        $nbChambresRsv=0;
+        foreach($this->chambres as $chambre){
+            if(count($chambre->getReservations()) > 0){
+                $nbChambresRsv ++;
+            }
+        }
+        return $nbChambresRsv;
     }
-
+    
     public function nbChambresDispo(){
-        return (count($this->chambres))-(count($this->reservations));
+        $nbChambresDispo= ($this->nbChambres() - $this->nbChambresRsv());
+        return $nbChambresDispo ;
+    }
+
+    // listes des chambres avec leurs statuts
+    public function statutChambre(){
+        if($this->nbChambresRsv() < 0){
+            echo "Aucune réservation !";
+        } else {
+        ?> <h3>Statuts des chambres de <?=$this ?> </h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Chambre</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Wifi</th>
+                    <th scope="col">Etat</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <?php foreach ($this->chambres as $chambre) {
+                ?> <tr>
+                    <td> <?= $chambre ?> </td> 
+                    <td><?= $chambre->getPrix() ?> € </td>
+                    <td><?= $chambre->getWifi() ?> </td>
+                    <?php if (count($chambre->getReservations()) > 0) {
+                    ?> <td>RESERVE</td> <?php
+                    } else {
+                    ?>  <td>DISPONIBLE</td> 
+                    </tr>
+                    
+                    <?php
+            }
+        } ?> 
+        </tbody>
+    </table>
+<?php
+
+        }
+    }
+
+    public function infoHotel(){
+        ?>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"><?= $this ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> <?=$this->afficherInfo() ?>  </td>
+                    <td> Nombres de chambres : <?=$this->nbChambres() ?>  </td>
+                    <td> Nombre de chambres réservées : <?=$this->nbChambresRsv() ?>  </td>
+                    <td> Nombre de chambres dispo :  <?=$this->nbChambresDispo() ?>  </td>
+                </tr>
+            </tbody>
+        </table>
+                <?php
     }
 
 

@@ -9,7 +9,7 @@ class Client{
         $this->prenom=$prenom;
         $this->nom=$nom;
 
-        // tableau qui va contenir l'objet Hotel, objet Client et objet Chambre
+        // tableau qui va contenir l'objet Client et objet Chambre (qui contient lui-même l'hotel)
         $this->reservations=[];
     }
 
@@ -68,4 +68,22 @@ class Client{
     public function ajouterReservation(Reservation $reservation){
         $this->reservations[]=$reservation;
     }
+    // prix du séjour
+public function prixSejour(){
+    foreach($this->reservations as $reservation){
+        $dureeSejour=$reservation->getFinReservation()->diff($reservation->getDebutReservation())->days;
+        $prixSejour=$dureeSejour * ($reservation->getChambre()->getPrix());
+    }
+    return $prixSejour ;
+    }
+
+    //reservations d'un client
+    public function afficherReservation(){
+        foreach($this->reservations as $reservation){
+            echo "<h3> Réservation de : ".$this."</h3> Hotel : ".$reservation->getChambre()->getHotel()." / ".$reservation->getChambre()->afficherInfo()." du ".$reservation."<br> Prix total : ".$this->prixSejour()." € ";
+        }
+    }
+
+    
+    
 }

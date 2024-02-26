@@ -16,7 +16,7 @@ class Chambre{
         $this->hotel=$hotel;
         // dans la méthode déclarée dans la classe Hotel, j'ajoute l'objet Chambre au tableau
         $this->hotel->ajouterChambre($this);
-        // tableau qui va contenir l'objet Hotel, objet Client et objet Chambre
+        // tableau qui va contenir l'objet Client et l'objet Chambre (qui contient lui-même l'hotel)
         $this->reservations=[];
 
     }
@@ -115,10 +115,17 @@ class Chambre{
     public function ajouterReservation(Reservation $reservation){
         $this->reservations[]=$reservation;
     }
+
+    public function showReserv(){
+        return $this->hotel;
+    }
+
     
     public function afficherInfo(){
-        return $this."(".$this->nbLits." lits - ".$this->prix." € - Wifi : ".$this->wifi.")";
+        return $this." (".$this->nbLits." lits - ".$this->prix." € - Wifi : ".$this->wifi.")";
     }
+
+
 
 
 

@@ -3,20 +3,17 @@
 class Reservation{
     private dateTime $debutReservation;
     private DateTime $finReservation;
-    private Hotel $hotel;
     private Client $client;
     private Chambre $chambre;
 
 
-    public function __construct(string $debutReservation, string $finReservation, Hotel $hotel, Client $client, Chambre $chambre){
+    public function __construct(string $debutReservation, string $finReservation, Client $client, Chambre $chambre){
         $this->debutReservation= new DateTime($debutReservation);
         $this->finReservation= new DateTime($finReservation);
-        $this->hotel=$hotel;
         $this->client=$client;
         $this->chambre=$chambre;
 
         //methodes dans leurs classes respectives
-        $this->hotel->ajouterReservation($this);
         $this->client->ajouterReservation($this);
         $this->chambre->ajouterReservation($this);
 
@@ -53,19 +50,6 @@ class Reservation{
     }
 
 
-    public function getHotel()
-    {
-        return $this->hotel;
-    }
-
-
-    public function setHotel($hotel)
-    {
-        $this->hotel = $hotel;
-
-        return $this;
-    }
-
 
     public function getClient()
     {
@@ -101,21 +85,9 @@ class Reservation{
 
     // ---------------------------methodes--------------------- 
     public function afficherInfo(){
-        return $this->client." dans l'hotel ".$this->hotel." du ".$this." ".$this->chambre;
-    }
-    
-    // afficher la durée du sejour
-    public function nbJours(){
-        $dureeSejour = $this->finReservation->diff($this->debutReservation)->days;
-        return $dureeSejour;
-    }
-
-    // afficher le prix du séjour
-    public function prixSejour(){
-        $dureeSejour = $this->finReservation->diff($this->debutReservation)->days;
-        $prixChambre=$this->chambre->getPrix();
-        $prixSejour=$dureeSejour * $prixChambre;
-        return $prixSejour;
+        ?> <h3>Réservations de l'hotel <?= $this->chambre->getHotel() ?></h3>
+        <p> <?= $this->client." - ".$this->chambre." du ".$this ?> </p>
+        <?php
     }
 
 

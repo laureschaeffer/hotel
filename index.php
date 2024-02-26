@@ -41,25 +41,29 @@ $chambre28= new Chambre(28, 200, 3, "oui", $hilton);
 $chambre29= new Chambre(29, 200, 3, "oui", $hilton);
 $chambre30= new Chambre(30, 200, 3, "oui", $hilton);
 
+// hotel regent
+
+$chambreR1=new Chambre(1, 100.0, 2, "oui", $hilton);
+$chambreR2= new Chambre(2, 100.0, 2, "oui", $hilton);
+
 //CLIENT string $prenom, string $nom
 $laureSchaeffer= new Client("Laure", "Schaeffer");
+$mickaelMurmann= new Client("Mickael", "Murmann");
 //RESERVATION string $debutReservation, string $finReservation, Hotel $hotel, Client $client, Chambre $chambre
-$reserv1= new Reservation("2024-02-25", "2024-02-28", $hilton, $laureSchaeffer, $chambre1);
+$reserv1= new Reservation("2024-02-25", "2024-02-28", $laureSchaeffer, $chambre1);
+$reserv2= new Reservation("2024-03-01", "2024-03-05", $mickaelMurmann, $chambre2);
 
 
-echo $chambre1;
-echo "<br>";
-echo $laureSchaeffer;
-echo "<br>";
-echo $hilton->afficherInfo();
-echo "<br>";
-// echo $hilton->afficherChambres()."<br>";
-echo($hilton->nbChambres());
-echo "<br>";
-echo($hilton->nbReservation());
-echo "<br>";
-echo($hilton->nbChambresDispo());
-echo "<br>";
+// premier affichage hotel
+echo $hilton->infoHotel();
+
+//deuxieme affichage réservations de l'hotel
 echo $reserv1->afficherInfo();
-echo "<br>";
-echo $reserv1->prixSejour();
+
+//troisieme affichage reservation vide de l'hotel Regent
+echo $regent->statutChambre();
+
+//quatrième affichage d'un client
+echo $laureSchaeffer->afficherReservation();
+
+echo $hilton->statutChambre();

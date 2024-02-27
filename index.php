@@ -43,15 +43,16 @@ $chambre30= new Chambre(30, 200, 3, "oui", $hilton);
 
 // hotel regent
 
-// $chambreR1=new Chambre(1, 100.0, 2, "oui", $hilton);
-// $chambreR2= new Chambre(2, 100.0, 2, "oui", $hilton);
+$chambreR1=new Chambre(1, 100.0, 2, "oui", $regent);
+$chambreR2= new Chambre(2, 100.0, 2, "oui", $regent);
 
 //CLIENT string $prenom, string $nom
-$laureSchaeffer= new Client("Laure", "Schaeffer");
-$mickaelMurmann= new Client("Mickael", "Murmann");
+$virgileGibello= new Client("Virgile", "GIBELLO");
+$mickaelMurmann= new Client("Mickael", "MURMANN");
 //RESERVATION string $debutReservation, string $finReservation, Hotel $hotel, Client $client, Chambre $chambre
-$reserv1= new Reservation("2024-02-25", "2024-02-28", $laureSchaeffer, $chambre1);
-$reserv2= new Reservation("2024-03-01", "2024-03-05", $mickaelMurmann, $chambre2);
+$reserv1= new Reservation("2021-01-01", "2021-01-01", $virgileGibello, $chambre17);
+$reserv2= new Reservation("2021-03-11", "2021-03-12", $mickaelMurmann, $chambre3);
+$reserv3= new Reservation("2021-04-01", "2021-04-01", $mickaelMurmann, $chambre4);
 
 
 ?>
@@ -62,30 +63,32 @@ $reserv2= new Reservation("2024-03-01", "2024-03-05", $mickaelMurmann, $chambre2
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
         <title>Hotel - POO </title>
     </head>
     <body>
         <div id="wrapper">
-            <h1>Hotel - Programation orientée objet </h1>
+            <h1>Hotel - Programation orientée objet</h1>
             
              <!-- premier affichage hotel -->
             <?= $hilton->infoHotel(); ?>
             
-            <!-- deuxieme affichage réservations de l'hotel -->
-            <?= $reserv1->afficherInfo(); ?>
-            
+            <!-- deuxieme affichage réservations de l'hotel Hilton  -->
+            <?=$hilton->afficherReservation(); ?>
+
             <!-- troisieme affichage reservation vide de l'hotel Regent -->
+            <?= $regent->afficherReservation() ?>
             
             
             <!-- quatrième affichage d'un client -->
-            <?= $laureSchaeffer->afficherReservation(); ?>
+            <?= $mickaelMurmann->afficherReservation(); ?>
             
             <!-- cinquieme affichage statuts des chambres  -->
             <?= $hilton->statutChambre(); ?>
             
-    </div>
+        </div>
     
-</body>
+    </body>
 </html>

@@ -3,11 +3,31 @@
     width: 100%;
     height: 100%;
 }
-
+h1{
+    padding: 3%;
+    text-align: center;
+}
 .card-header p{
     font-size: x-large;
 }
 
 .card{
     margin-bottom: 5%;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.green{
+    background-color: #32D296;
+}
+.red{
+    background-color: #F0506E;
+}
+
+.red, .green{
+
+    color: white;
+    width: 120px;
 }

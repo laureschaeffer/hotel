@@ -116,15 +116,15 @@ class Chambre{
         $this->reservations[]=$reservation;
     }
 
-    public function showReserv(){
-        return $this->hotel;
-    }
 
     
     public function afficherInfo(){
         return $this." (".$this->nbLits." lits - ".$this->prix." € - Wifi : ".$this->wifi.")";
     }
 
+    public function dump(){
+        var_dump($this->reservations);
+    }
 
 
 

@@ -83,21 +83,11 @@ class Reservation{
         return $this->debutReservation->format('d-m-Y')." au ".$this->finReservation->format('d-m-Y');
     }
 
-    // ---------------------------methodes--------------------- 
-    public function afficherInfo(){
-        ?> 
-        <div class="card">
-            <div class="card-header">
-                <p>Réservations de l'hotel <?= $this->chambre->getHotel() ?></p>
-            </div>
-            <div class="card-body">
-                <p><?= $this->client." - ".$this->chambre." du ".$this ?> </p>
-            </div>
-        </div>
-
-        <?php
+            // fonction qui retourne le nombre de jour entre la date de début et la date de fin
+    public function dureeSejour(){
+        $dureeSejour = $this->debutReservation->diff($this->finReservation);
+        return $dureeSejour->format('%a');
     }
-
 
 
 }

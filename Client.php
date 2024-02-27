@@ -80,15 +80,17 @@ class Client{
             </div>
             <div class="card-body">
                 <p class="green"><?= count($this->reservations); ?> réservation </p>
+                <?php $prixTotal=0 ; ?>
                <?php foreach($this->reservations as $reservation){ 
                 // calcul prix du sejour = prix de la chambre * (1 + nb de jours du séjour)
                 $prixSejour= ($reservation->getChambre()->getPrix()) * (1 + $reservation->dureeSejour()) ;
+                $prixTotal+=$prixSejour ;
                 ?>
                 
                 <p><span class="bold"><?=$reservation->getChambre()->getHotel()?> </span> / <?=$reservation->getChambre()->afficherInfo()." du ".$reservation ?> </p>
-                <p>Prix total : <?= $prixSejour ?> €</p>
                 <?php
                } ?>
+               <p>Prix total : <?= $prixTotal ?> €</p>
             
              </div>
            </div>

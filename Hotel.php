@@ -150,91 +150,88 @@ class Hotel{
 
     // listes des chambres avec leurs statuts
     public function statutChambre(){
-        ?> <div class="card-header"> 
-            <p>Statuts des chambres de <span class="bold"><?=$this ?> </span></p>
+            $result= "<div class='card-header'> 
+            <p>Statuts des chambres de <span class='bold'>$this </span></p>
         
         </div>
-        <table class="table table-striped">
+        <table class='table table-striped'>
             <thead>
                 <tr>
-                    <th scope="col">Chambre</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Wifi</th>
-                    <th scope="col">Etat</th>
+                    <th scope='col'>Chambre</th>
+                    <th scope='col'>Prix</th>
+                    <th scope='col'>Wifi</th>
+                    <th scope='col'>Etat</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>";
                 
-                <?php foreach ($this->chambres as $chambre) {
-                ?> <tr>
-                    <td> <?= $chambre ?> </td> 
-                    <td><?= $chambre->getPrix() ?> € </td>
-                    <?php if ($chambre->getWifi()=="oui"){
-                      ?>  <td><i class="fa-solid fa-wifi"></i></td>
-                        <?php
+                foreach ($this->chambres as $chambre) {
+                $result.= " <tr>
+                    <td>  $chambre  </td> 
+                    <td>".$chambre->getPrix()." € </td>" ;
+                     if ($chambre->getWifi()=='oui'){
+                     $result.=" <td><i class='fa-solid fa-wifi'></i></td>";
+                        
                     } else {
-                        ?> <td></td>
-                   <?php }
+                        $result.=" <td></td>";
+                    }
                     if (count($chambre->getReservations()) > 0) {
-                    ?><td class="red">RESERVE</td>
-                     <?php } else {
-                    ?><td class="green">DISPONIBLE</td> 
-                    </tr>
+                    $result.="<td class='red'>RESERVE</td>";
+                      } else {
+                    $result.= "<td class='green'>DISPONIBLE</td> 
+                    </tr>";
                     
-                    <?php
+                    
             }
-        } ?> 
-            </tbody>
-        </table>
-<?php
+        }  
+            $result.= "</tbody>
+        </table>";
+        return $result;
 
-}
+    }
         
     // chiffres sur les chambres de l'hotel
     public function infoHotel(){
-        ?>
-        <div class="card">
-            <div class="card-header">
-                <p><?=$this ?></p>
+        
+        $result = "<div class='card'>
+            <div class='card-header'>
+                <p>$this</p>
             </div>
-            <div class="card-body">
-                <p><?= $this->afficherInfo() ?></p>
-                <p>Nombres de chambres : <?=$this->nbChambres() ?></p>
-                <p>Nombre de chambres réservées : <?=$this->nbChambresRsv() ?></p>
-                <p>Nombre de chambres dispo :  <?=$this->nbChambresDispo() ?></p>
+            <div class='card-body'>
+                <p>".$this->afficherInfo()."</p>
+                <p>Nombres de chambres :".$this->nbChambres()."</p>
+                <p>Nombre de chambres réservées :".$this->nbChambresRsv()."</p>
+                <p>Nombre de chambres dispo :".$this->nbChambresDispo()."</p>
             </div>
-        </div>
-        <?php
-    }
+        </div>";
+        return $result; 
+            }
 
 
     // affiche s'il y en a les réservations de l'hotel
-    public function afficherReservation(){ ?>
-        <div class="card">
-            <div class="card-header">
-                <p>Réservations de l'hotel <?= $this ?></p>
+    public function afficherReservation(){ 
+        $result = "<div class='card'>
+            <div class='card-header'>
+                <p>Réservations de l'hotel $this </p>
             </div>
-            <div class="card-body">
-        <?php
-        if ($this->nbChambresRsv() >= 1) { ?>
-            <p class="green"> <?=$this->nbChambresRsv() ?> réservations </p>
-                
-            <?php
+            <div class='card-body'>";
+        
+        if ($this->nbChambresRsv() >= 1) { 
+           $result.="<p class='green'>".$this->nbChambresRsv()." réservations </p>";
             // comme getReservations renvoie un tableau il faut deux boucles pour le parcourir et accéder aux getters nécessaires
             foreach ($this->chambres as $chambre) {
-                foreach ($chambre->getReservations() as $reservation) { ?>
-                <p><?= $reservation->getClient() ?> - <?=$chambre?> du <?= $reservation ?></p>
-                <?php
+                foreach ($chambre->getReservations() as $reservation) {
+                $result.= "<p>".$reservation->getClient()." - ".$chambre." du $reservation </p>";
                 }
             }
-        } else { ?>
-                <p>Aucune réservation ! </p>
-                <?php
-        } ?>
-            </div> 
-        </div>
-        <?php
-    }
+        } else {
+                $result.= "<p>Aucune réservation ! </p>";
+                
+        } 
+        $result.=" </div> 
+                </div> ";
+        return $result ;
+            }
 
 
 }

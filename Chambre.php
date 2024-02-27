@@ -122,12 +122,6 @@ class Chambre{
         return $this." (".$this->nbLits." lits - ".$this->prix." € - Wifi : ".$this->wifi.")";
     }
 
-    public function dump(){
-        var_dump($this->reservations);
-    }
-
-
-
 
 
 }
